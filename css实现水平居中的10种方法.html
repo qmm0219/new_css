@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+			}
+			html,body{
+				width:100%;
+				height:100%;
+			}
+			/* 公共代码 */
+			h3{
+				margin:10px 0px;
+			}
+			.wrap {
+			    border: 1px solid red;
+			    width: 300px;
+			    height: 300px;
+			}
+			
+			.box {
+			    background: green;    
+			}
+			
+			.box.size{
+			    width: 100px;
+			    height: 100px;
+			}
+			/* 公共代码 */
+			.one_wrap{
+				position: relative;
+			}
+			.one_box{
+				position:absolute;
+				top:50%;
+				left:50%;
+				margin-left:-50px;
+				margin-top:-50px;
+			}
+			.two_wrap{
+				position:relative;
+			}
+			.two_box{
+				position:absolute;
+				top:0;
+				left:0;
+				right:0;
+				bottom:0;
+				margin:auto;
+			}
+			.three_wrap{
+				position: relative;
+			}
+			.three_box{
+				position:absolute;
+				top:calc(50% - 50px);
+				left:calc(50% - 50px);
+			}
+			.four_wrap{
+				position:relative;
+			}
+			.four_box{
+				position: absolute;
+				top:50%;
+				left:50%;
+				transform: translate(-50%,-50%);
+			}
+			.five_wrap{
+				line-height: 300px;
+				text-align: center;
+				font-size:0px;
+			}
+			.five_box{
+				font-size: 16px;
+			    display: inline-block;
+			    vertical-align: middle;
+			    line-height: initial;
+			    text-align: left; 
+			}
+			.six_wrap{
+				writing-mode: vertical-lr;
+    			text-align: center;
+			}
+			.six_inner{
+				writing-mode: horizontal-tb;
+			    display: inline-block;
+			    text-align: center;
+			    width: 100%;
+			}
+			.six_box{
+				display: inline-block;
+    			margin: auto;
+    			text-align: left;	
+			}
+			.seven_wrap{
+				text-align: center;
+			}
+			.seven_box{
+				display: inline-block;
+			}
+			.eight_wrap{
+				display:table-cell;
+				text-align: center;
+				vertical-align: middle;
+			}
+			.eight_box{
+				display: inline-block;
+			}
+			.nine_wrap{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.ten_wrap{
+				display: grid;
+			}
+			.ten_box{
+				align-self: center;
+    			justify-self: center;
+			}
+		</style>
+	</head>
+	<body>
+		<!--仅居中元素定宽高适用
+			1、absolute + 负margin
+			2、absolute + margin auto
+			3、absolute + calc
+		-->
+		<!--居中元素不定宽高
+			4、absolute + transform
+			5、lineheight
+			6、writing-mode
+			7、table
+			8、css-table
+			9、flex
+			10、grid
+		-->
+		<!--第一种：absolute + 负margin-->
+		<h3>1、absolute + 负margin</h3>
+		<div class="wrap one_wrap">
+		    <div class="box size one_box">123123</div>
+		</div>
+		<hr />
+		<!--第二种：absolute + margin auto-->
+		<h3>2、absolute + margin auto</h3>
+		<div class="wrap two_wrap">
+		    <div class="box size two_box">123123</div>
+		</div>
+		<hr />
+		<!--第三种：absolute + calc-->
+		<h3>3、absolute + calc</h3>
+		<div class="wrap three_wrap">
+		    <div class="box size three_box">123123</div>
+		</div>
+		<hr />
+		
+		
+		<!--还是绝对定位，但这个方法不需要子元素固定宽高，所以不再需要size类了-->
+		<!--第四种：absolute + transform-->
+		<h3>4、absolute + transform</h3>
+		<div class="wrap four_wrap">
+		    <div class="box four_box">子元素不设置宽高，修复绝对定位的问题，还可以使用css3新增的transform，transform的translate属性也可以设置百分比，其是相对于自身的宽和高，所以可以讲translate设置为-50%，就可以做到居中了</div>
+		</div>
+		<hr />
+		
+		<!--第五种：lineheight-->
+		<!--把box设置为行内元素，通过text-align就可以做到水平居中，通过vertical-align也可以在垂直方向做到居中-->
+		<h3>5、lineheight</h3>
+		<div class="wrap five_wrap">
+		    <div class="box five_box">123456</div>
+		</div>
+		<hr />
+		
+		<!--第六种：writing-mode-->
+		<!--把box设置为行内元素，通过text-align就可以做到水平居中，通过vertical-align也可以在垂直方向做到居中-->
+		<h3>6、writing-mode</h3>
+		<div class="box1">水平方向</div>
+		<!--垂直方向设置属性：writing-mode:vertical-lr;-->
+		<div class="box2" style="writing-mode:vertical-lr;">垂直方向</div>
+		
+		<!--水平方向上的css属性，都会变为垂直方向上的属性，比如text-align，通过writing-mode和text-align就可以做到水平和垂直方向的居中了，只不过要稍微麻烦一点-->
+		<div class="wrap six_wrap">
+			<div class="six_inner">
+		    	<div class="box six_box">123456</div>
+			</div>
+		</div>
+		<hr />
+		
+		
+		<!--第七种：table-->
+		<!--曾经table被用来做页面布局，现在没人这么做了，但table也能够实现水平垂直居中，但是会增加很多冗余代码-->
+		<h3>7、table</h3>
+		<table>
+		    <tbody>
+		        <tr>
+		            <td class="wrap seven_wrap">
+		                <div class="box seven_box">123123</div>
+		            </td>
+		        </tr>
+		    </tbody>
+		</table>
+		<hr />
+		
+		<!--第八种：css-table-->
+		<!--css新增的table属性，可以让我们把普通元素，变为table元素的现实效果，通过这个特性也可以实现水平垂直居中-->
+		<h3>8、css-table</h3>
+		<div class="wrap eight_wrap">
+			<div class="box eight_box">css新增的table属性，可以让我们把普通元素，变为table元素的现实效果，通过这个特性也可以实现水平垂直居中</div>
+		</div>
+		<hr />
+		
+		<!--第九种：flex-->
+		<!--flex作为现代的布局方案，颠覆了过去的经验，只需几行代码就可以优雅的做到水平垂直居中-->
+		<h3>9、flex</h3>
+		<div class="wrap nine_wrap">
+			<div class="box nine_box">flex作为现代的布局方案，颠覆了过去的经验，只需几行代码就可以优雅的做到水平垂直居中</div>
+		</div>
+		<hr />
+		
+		<!--第十⑩种：grid-->
+		<!--grid css新出的网格布局，由于兼容性不太好，一直没太关注，通过grid也可以实现水平垂直居中-->
+		<h3>10、grid</h3>
+		<div class="wrap ten_wrap">
+			<div class="box ten_box">grid </div>
+		</div>
+		<hr />
+	</body>
+</html>
